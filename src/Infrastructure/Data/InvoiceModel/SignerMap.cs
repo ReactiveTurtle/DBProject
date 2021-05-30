@@ -4,29 +4,29 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.InvoiceModel
 {
-    public class SignerMap : IEntityTypeConfiguration<Signer>
+    public class SignerMap : IEntityTypeConfiguration<SignerPreset>
     {
-        public void Configure(EntityTypeBuilder<Signer> builder)
+        public void Configure(EntityTypeBuilder<SignerPreset> builder)
         {
             builder.HasKey( x => x.Id );
             builder.Property( x => x.Id )
                 .ForSqlServerUseSequenceHiLo( HiLoSequence.DBSequenceHiLoForSigner );
+
+            builder.OwnsOne(value => value.Signer,
+                signerBuilder =>
+                {
+                    signerBuilder.Property( x => x.Fullname )
+                        .IsRequired();
             
-            builder.Property( x => x.Fullname )
-                .IsRequired();
+                    signerBuilder.Property( x => x.Position )
+                        .IsRequired();
             
-            builder.Property( x => x.Position )
-                .IsRequired();
+                    signerBuilder.Property( x => x.Address )
+                        .IsRequired();
             
-            builder.Property( x => x.Address )
-                .IsRequired();
-            
-            builder.Property( x => x.PhoneNumber )
-                .IsRequired();
-            
-            builder.HasMany<Invoice>()
-                .WithOne( x => x.Signer )
-                .OnDelete( DeleteBehavior.Cascade );
+                    signerBuilder.Property( x => x.PhoneNumber )
+                        .IsRequired();
+                });
         }
     }
 }

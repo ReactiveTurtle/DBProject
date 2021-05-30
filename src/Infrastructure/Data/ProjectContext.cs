@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.InvoiceModel;
 using Infrastructure.Data.InvoiceModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -25,6 +26,11 @@ namespace Infrastructure.Data
         private ProjectContext( DbContextOptions<ProjectContext> options ) : base( options )
         {
         }
+        
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<SignerPreset> Signers { get; set; }
+        public DbSet<ProductPreset> Products { get; set; }
+        public DbSet<ManufacturerPreset> Manufacturers { get; set; }
 
         protected override void OnModelCreating( ModelBuilder builder )
         {
@@ -34,18 +40,15 @@ namespace Infrastructure.Data
                 .StartsAt( 1 ).IncrementsBy( 1 );
             builder.HasSequence<int>( HiLoSequence.DBSequenceHiLoForSigner )
                 .StartsAt( 1 ).IncrementsBy( 1 );
-            builder.HasSequence<int>( HiLoSequence.DBSequenceHiLoForProductPreset )
+            builder.HasSequence<int>( HiLoSequence.DBSequenceHiLoForProduct )
                 .StartsAt( 1 ).IncrementsBy( 1 );
             builder.HasSequence<int>( HiLoSequence.DBSequenceHiLoForManufacturer )
-                .StartsAt( 1 ).IncrementsBy( 1 );
-            builder.HasSequence<int>( HiLoSequence.DBSequenceHiLoForProductInInvoice )
                 .StartsAt( 1 ).IncrementsBy( 1 );
 
             builder.ApplyConfiguration( new InvoiceMap() );
             builder.ApplyConfiguration( new SignerMap() );
             builder.ApplyConfiguration( new ProductMap() );
             builder.ApplyConfiguration( new ManufacturerMap() );
-            builder.ApplyConfiguration( new ProductInInvoiceMap() );
 
             foreach ( var property in builder.Model.GetEntityTypes().SelectMany( t => t.GetProperties() ) )
             {

@@ -1,18 +1,17 @@
 using System;
+using System.Collections.Generic;
+using Domain.InvoiceModel;
 using Toolkit.Domain.Abstractions;
 
-namespace Domain.InvoiceModel
+namespace Domain.Shared
 {
-    /// <summary>
-    /// Товар
-    /// </summary>
-    public class Product : Entity
+    public class Product : ValueObject<Product>
     {
         /// <summary>
-        /// Производитель товара
+        /// Данные о производителе товара
         /// </summary>
         public Manufacturer Manufacturer { get; private set; }
-        
+
         /// <summary>
         /// Название товара
         /// </summary>
@@ -57,6 +56,27 @@ namespace Domain.InvoiceModel
         // Workaround for EF
         protected Product()
         {
+        }
+
+        public override Product Copy()
+        {
+            return new Product(
+                Manufacturer,
+                Name,
+                Price,
+                CurrencyType,
+                ManufactureDateTime,
+                ExpirationDateTime);
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Manufacturer;
+            yield return Name;
+            yield return Price;
+            yield return CurrencyType;
+            yield return ManufactureDateTime;
+            yield return ExpirationDateTime;
         }
     }
 }

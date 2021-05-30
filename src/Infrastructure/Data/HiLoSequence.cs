@@ -4,8 +4,7 @@
     {
         public static readonly string DBSequenceHiLoForInvoice = "DBSequenceHiLoForInvoice";
         public static readonly string DBSequenceHiLoForSigner = "DBSequenceHiLoForSigner";
-        public static readonly string DBSequenceHiLoForProductPreset = "DBSequenceHiLoForProductPreset";
+        public static readonly string DBSequenceHiLoForProduct = "DBSequenceHiLoForProduct";
         public static readonly string DBSequenceHiLoForManufacturer = "DBSequenceHiLoForManufacturer";
-        public static readonly string DBSequenceHiLoForProductInInvoice = "DBSequenceHiLoForProductInInvoice";
     }
 }

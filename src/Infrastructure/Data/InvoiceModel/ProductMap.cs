@@ -1,38 +1,44 @@
 using Domain.InvoiceModel;
+using Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Newtonsoft.Json;
 
 namespace Infrastructure.Data.InvoiceModel
 {
-    public class ProductMap : IEntityTypeConfiguration<Product>
+    public class ProductMap : IEntityTypeConfiguration<ProductPreset>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<ProductPreset> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
-                .ForSqlServerUseSequenceHiLo(HiLoSequence.DBSequenceHiLoForProductPreset);
+                .ForSqlServerUseSequenceHiLo(HiLoSequence.DBSequenceHiLoForProduct);
 
-            builder.Property(value => value.Manufacturer)
-                .IsRequired();
-            
-            builder.Property(value => value.Name)
-                .IsRequired();
+            builder.OwnsOne(value => value.Product,
+                (productBuilder) =>
+                {
+                    productBuilder.Property("Manufacturer")
+                        .HasConversion(new ValueConverter<Manufacturer, string>(
+                            value => JsonConvert.SerializeObject(value),
+                            value => JsonConvert.DeserializeObject<Manufacturer>(value)))
+                        .IsRequired();
 
-            builder.Property(value => value.Price)
-                .IsRequired();
+                    productBuilder.Property(value => value.Name)
+                        .IsRequired();
 
-            builder.Property(value => value.CurrencyType)
-                .IsRequired();
+                    productBuilder.Property(value => value.Price)
+                        .IsRequired();
 
-            builder.Property(value => value.ManufactureDateTime)
-                .IsRequired();
+                    productBuilder.Property(value => value.CurrencyType)
+                        .IsRequired();
 
-            builder.Property(value => value.ExpirationDateTime)
-                .IsRequired();
-            
-            builder.Metadata
-                .FindNavigation( nameof( Product.Manufacturer ) )
-                .SetPropertyAccessMode( PropertyAccessMode.Field );
+                    productBuilder.Property(value => value.ManufactureDateTime)
+                        .IsRequired();
+
+                    productBuilder.Property(value => value.ExpirationDateTime)
+                        .IsRequired();
+                });
         }
     }
 }

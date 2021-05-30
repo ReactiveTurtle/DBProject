@@ -56,6 +56,4 @@ foreach ($d in $dir){
             Write-Content "$($path)\appsettings.$($env).json" $blank
         }
     }
-
-    Copy-Item "nlog.config" "$($path)\nlog.config"
 }

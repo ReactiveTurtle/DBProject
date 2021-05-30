@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Domain.Shared;
 using Toolkit.Domain.Abstractions;
 
 namespace Domain.InvoiceModel
@@ -12,18 +13,19 @@ namespace Domain.InvoiceModel
 
         public Signer Signer { get; private set; }
 
-        public virtual IReadOnlyList<ProductInInvoice> Products => _products;
+        public virtual IReadOnlyList<Product> Products => _products;
 
-        private readonly List<ProductInInvoice> _products = new List<ProductInInvoice>();
+        private readonly List<Product> _products = new List<Product>();
 
         // Workaround for EF
         protected Invoice()
         {
         }
 
-        public void AddProduct(int productId, int count)
+        public void AddProducts(Product product, params Product[] products)
         {
-            _products.Add(new ProductInInvoice(Id, productId, count));
+            _products.Add(product);
+            _products.AddRange(products);
         }
     }
 }
