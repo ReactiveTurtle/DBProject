@@ -2,7 +2,7 @@ using Domain.InvoiceModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Data.InvoiceModel
+namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
 {
     public class SignerMap : IEntityTypeConfiguration<SignerPreset>
     {

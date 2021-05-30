@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newtonsoft.Json;
 
-namespace Infrastructure.Data.InvoiceModel
+namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
 {
     public class ProductMap : IEntityTypeConfiguration<ProductPreset>
     {

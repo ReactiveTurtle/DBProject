@@ -1,4 +1,6 @@
 ﻿using System;
+using Domain.InvoiceModel;
+using Infrastructure.Data.InvoiceModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +10,8 @@ namespace Infrastructure.Data
     {
         public static IServiceCollection AddRepositories( this IServiceCollection services )
         {
+            services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+
             return services;
         }
 
