@@ -1,0 +1,174 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+code {
+    color: #e01a76;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.input-wrapper {
+    font-family: "Quicksand", Arial, sans-serif;
+    width: 100%;
+    position: relative;
+    font-size: 14px;
+    padding-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.input-wrapper label {
+    position: absolute;
+    left: 14px;
+    top: calc(50% + 5px);
+    transform: translateY(-50%);
+    color: gray;
+    transition: top 0.3s ease,
+    color 0.3s ease,
+    font-size 0.3s ease;
+}
+
+.input-wrapper input, .input-wrapper select {
+    font: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 12px;
+    width: 100%;
+    min-width: 250px;
+    outline: none;
+    font-size: 14px;
+    color: black;
+
+    transition: border-color 0.3s ease;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-top: 2px;
+}
+
+.input-wrapper input + label, .input-wrapper select + label {
+    left: 12px;
+    padding: 0 5px;
+}
+
+.input-wrapper input.ng-valid.ng-touched,
+.input-wrapper input.ng-valid:focus,
+.input-wrapper select.ng-valid.ng-touched,
+.input-wrapper select.ng-valid:focus {
+    margin-top: 0;
+    border: 2px solid #64dd17;
+}
+
+.input-wrapper input.ng-invalid.ng-touched,
+.input-wrapper input.ng-invalid:focus,
+.input-wrapper select.ng-invalid.ng-touched,
+.input-wrapper select.ng-invalid:focus {
+    margin-top: 0;
+    border: 2px solid #d50000;
+}
+
+.input-wrapper input:focus + label,
+.input-wrapper input.ng-dirty + label,
+.input-wrapper select:focus + label,
+.input-wrapper select.ng-dirty + label {
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+    background-color: white;
+}
+
+.input-wrapper input.ng-valid.ng-touched + label,
+.input-wrapper input.ng-valid:focus + label,
+.input-wrapper select.ng-valid.ng-touched + label,
+.input-wrapper select.ng-valid:focus + label {
+    color: #64dd17;
+}
+
+.input-wrapper input.ng-invalid.ng-touched + label,
+.input-wrapper input.ng-invalid:focus + label,
+.input-wrapper select.ng-invalid.ng-touched + label,
+.input-wrapper select.ng-invalid:focus + label {
+    color: #d50000;
+}
+
+.rt-card {
+    width: 60%;
+    padding: 1rem;
+    margin: auto;
+    -webkit-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.rt-card-title {
+    margin: 0.5rem 0.8rem 0.7rem !important;
+}
+
+.rt-button {
+    min-width: 100px;
+    border-radius: calc(100vh);
+    background: #00e676;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 12px 25px;
+    font-family: "Quicksand", Arial, sans-serif;
+    font-size: 14px;
+}
+
+.rt-button:hover {
+    background: #00b248;
+    cursor: pointer;
+}
+
+.rt-table {
+    width: 100%;
+    font-family: "Quicksand", Arial, sans-serif;
+    font-weight: 400;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    color: gray;
+}
+
+.rt-table thead tr th,
+.rt-table tbody tr td {
+    padding: 0.75rem 1.5rem;
+}
+
+.rt-table thead tr th {
+    background: #00b8d4;
+    color: white;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.rt-table tbody tr:nth-of-type(even) {
+    background: rgba(243, 243, 243, 0.3);
+}
+
+.rt-table tbody tr:hover {
+    color: #00b8d4;
+    cursor: pointer;
+}

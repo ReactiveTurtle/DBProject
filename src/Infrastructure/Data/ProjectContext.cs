@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.InvoiceModel;
-using Infrastructure.Data.InvoiceModel;
+using Infrastructure.Data.InvoiceModel.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -27,10 +27,10 @@ namespace Infrastructure.Data
         {
         }
         
-        public DbSet<Invoice> Invoices { get; set; }
-        public DbSet<SignerPreset> Signers { get; set; }
-        public DbSet<ProductPreset> Products { get; set; }
-        public DbSet<ManufacturerPreset> Manufacturers { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<SignerPreset> Signer { get; set; }
+        public DbSet<ProductPreset> Product { get; set; }
+        public DbSet<ManufacturerPreset> Manufacturer { get; set; }
 
         protected override void OnModelCreating( ModelBuilder builder )
         {
@@ -46,9 +46,9 @@ namespace Infrastructure.Data
                 .StartsAt( 1 ).IncrementsBy( 1 );
 
             builder.ApplyConfiguration( new InvoiceMap() );
-            builder.ApplyConfiguration( new SignerMap() );
-            builder.ApplyConfiguration( new ProductMap() );
-            builder.ApplyConfiguration( new ManufacturerMap() );
+            builder.ApplyConfiguration( new SignerPresetMap() );
+            builder.ApplyConfiguration( new ProductPresetMap() );
+            builder.ApplyConfiguration( new ManufacturerPresetMap() );
 
             foreach ( var property in builder.Model.GetEntityTypes().SelectMany( t => t.GetProperties() ) )
             {

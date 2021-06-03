@@ -11,9 +11,9 @@ namespace Domain.InvoiceModel
 
         Task<ManufacturerPreset> GetById(int id);
 
-        Task<int> Add(ManufacturerPreset counterparty);
+        Task<int> Add(ManufacturerPreset manufacturerPreset);
 
-        Task Update(ManufacturerPreset counterparty);
+        Task Update(ManufacturerPreset manufacturerPreset);
 
         Task Delete(ManufacturerPreset manufacturerPreset);
     }

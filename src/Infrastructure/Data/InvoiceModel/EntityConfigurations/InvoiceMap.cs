@@ -1,9 +1,6 @@
 using Domain.InvoiceModel;
-using Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Newtonsoft.Json;
 
 namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
 {
@@ -19,18 +16,11 @@ namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
                 .HasMaxLength( Invoice.NameMaxLength )
                 .IsRequired();
             
-            builder.Property( x => x.PreparationDate )
+            builder.Property( x => x.SignerId )
                 .IsRequired();
             
-            builder.Property("Signer")
-                .HasConversion(new ValueConverter<Signer, string>(
-                    value => JsonConvert.SerializeObject(value),
-                    value => JsonConvert.DeserializeObject<Signer>(value)))
+            builder.Property( x => x.PreparationDate )
                 .IsRequired();
-
-            builder.Metadata
-                .FindNavigation(nameof(Invoice.Products))
-                .SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

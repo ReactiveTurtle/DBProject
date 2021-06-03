@@ -18,7 +18,7 @@ namespace Infrastructure.Data.InvoiceModel
         
         public async Task<SearchResult<ManufacturerPreset>> Search(BaseSearchPattern searchPattern)
         {
-            IQueryable<ManufacturerPreset> query = _ctx.Manufacturers.AsQueryable();
+            IQueryable<ManufacturerPreset> query = _ctx.Manufacturer.AsQueryable();
 
             int totalCount = query.Count();
 
@@ -50,25 +50,25 @@ namespace Infrastructure.Data.InvoiceModel
 
         public async Task<ManufacturerPreset> GetById(int id)
         {
-            return await _ctx.Manufacturers
+            return await _ctx.Manufacturer
                 .SingleOrDefaultAsync( x => x.Id == id );
         }
 
-        public async Task<int> Add(ManufacturerPreset counterparty)
+        public async Task<int> Add(ManufacturerPreset manufacturerPreset)
         {
-            EntityEntry<ManufacturerPreset> c = await _ctx.Manufacturers.AddAsync( counterparty );
+            EntityEntry<ManufacturerPreset> c = await _ctx.Manufacturer.AddAsync( manufacturerPreset );
             return c.Entity.Id;
         }
 
-        public Task Update(ManufacturerPreset counterparty)
+        public Task Update(ManufacturerPreset manufacturerPreset)
         {
-            _ctx.Manufacturers.Update( counterparty );
+            _ctx.Manufacturer.Update( manufacturerPreset );
             return Task.CompletedTask;
         }
 
         public Task Delete(ManufacturerPreset manufacturerPreset)
         {
-            _ctx.Manufacturers.Remove( manufacturerPreset );
+            _ctx.Manufacturer.Remove( manufacturerPreset );
             return Task.CompletedTask;
         }
     }

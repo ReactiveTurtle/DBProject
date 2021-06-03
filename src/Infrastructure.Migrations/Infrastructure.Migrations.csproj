@@ -28,18 +28,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="appsettings.json" />
-        <Content Include="appsettings.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="appsettings.aktuganovdenis.json" />
-        <Content Include="appsettings.aktuganovdenis.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <None Remove="appsettings.qa.json" />
-        <Content Include="appsettings.qa.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
+        <None Update="appsettings.aktuganovdenis-notebook.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

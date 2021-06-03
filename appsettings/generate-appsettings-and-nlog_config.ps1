@@ -23,7 +23,7 @@ function Write-Json($path, $obj){
     Write-Content $path $json
 }
 
-$envs = @("qa", "aktuganovdenis")
+$envs = @("qa", "aktuganovdenis", "aktuganovdenis-notebook")
 
 $dir = dir . | ?{$_.PSISContainer}
 

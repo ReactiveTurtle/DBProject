@@ -1,10 +1,11 @@
 using Domain.InvoiceModel;
+using Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
 {
-    public class SignerMap : IEntityTypeConfiguration<SignerPreset>
+    public class SignerPresetMap : IEntityTypeConfiguration<SignerPreset>
     {
         public void Configure(EntityTypeBuilder<SignerPreset> builder)
         {
@@ -27,6 +28,11 @@ namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
                     signerBuilder.Property( x => x.PhoneNumber )
                         .IsRequired();
                 });
+            
+            builder.HasMany<Invoice>()
+                .WithOne()
+                .HasForeignKey(x => x.SignerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

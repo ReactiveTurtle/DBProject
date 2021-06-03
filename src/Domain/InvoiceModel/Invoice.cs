@@ -11,21 +11,27 @@ namespace Domain.InvoiceModel
 
         public DateTime PreparationDate { get; private set; }
 
-        public Signer Signer { get; private set; }
+        public int SignerId { get; private set; }
 
-        public virtual IReadOnlyList<Product> Products => _products;
+        public virtual IReadOnlyList<ProductInInvoice> Products => _products;
 
-        private readonly List<Product> _products = new List<Product>();
-
+        private readonly List<ProductInInvoice> _products = new List<ProductInInvoice>();
+        
+        public Invoice(string name, DateTime preparationDate, int signerId)
+        {
+            Name = name;
+            PreparationDate = preparationDate;
+            SignerId = signerId;
+        }
+        
         // Workaround for EF
         protected Invoice()
         {
         }
 
-        public void AddProducts(Product product, params Product[] products)
+        public void AddProduct(int manufacturerId, int productId)
         {
-            _products.Add(product);
-            _products.AddRange(products);
+            _products.Add(new ProductInInvoice(manufacturerId, productId));
         }
     }
 }

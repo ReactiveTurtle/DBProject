@@ -8,11 +8,6 @@ namespace Domain.Shared
     public class Product : ValueObject<Product>
     {
         /// <summary>
-        /// Данные о производителе товара
-        /// </summary>
-        public Manufacturer Manufacturer { get; private set; }
-
-        /// <summary>
         /// Название товара
         /// </summary>
         public string Name { get; private set; }
@@ -38,14 +33,12 @@ namespace Domain.Shared
         public DateTime ExpirationDateTime { get; private set; }
 
         public Product(
-            Manufacturer manufacturer,
             string name,
             decimal price,
             CurrencyType currencyType,
             DateTime manufactureDateTime,
             DateTime expirationDateTime)
         {
-            Manufacturer = manufacturer;
             Name = name;
             Price = price;
             CurrencyType = currencyType;
@@ -61,7 +54,6 @@ namespace Domain.Shared
         public override Product Copy()
         {
             return new Product(
-                Manufacturer,
                 Name,
                 Price,
                 CurrencyType,
@@ -71,7 +63,6 @@ namespace Domain.Shared
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return Manufacturer;
             yield return Name;
             yield return Price;
             yield return CurrencyType;

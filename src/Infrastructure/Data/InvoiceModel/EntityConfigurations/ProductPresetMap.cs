@@ -1,13 +1,10 @@
 using Domain.InvoiceModel;
-using Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Newtonsoft.Json;
 
 namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
 {
-    public class ProductMap : IEntityTypeConfiguration<ProductPreset>
+    public class ProductPresetMap : IEntityTypeConfiguration<ProductPreset>
     {
         public void Configure(EntityTypeBuilder<ProductPreset> builder)
         {
@@ -15,15 +12,12 @@ namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
             builder.Property(x => x.Id)
                 .ForSqlServerUseSequenceHiLo(HiLoSequence.DBSequenceHiLoForProduct);
 
+            builder.Property(value => value.ManufacturerId)
+                .IsRequired();
+            
             builder.OwnsOne(value => value.Product,
                 (productBuilder) =>
                 {
-                    productBuilder.Property("Manufacturer")
-                        .HasConversion(new ValueConverter<Manufacturer, string>(
-                            value => JsonConvert.SerializeObject(value),
-                            value => JsonConvert.DeserializeObject<Manufacturer>(value)))
-                        .IsRequired();
-
                     productBuilder.Property(value => value.Name)
                         .IsRequired();
 
@@ -39,6 +33,11 @@ namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
                     productBuilder.Property(value => value.ExpirationDateTime)
                         .IsRequired();
                 });
+
+            builder.HasMany<ProductInInvoice>()
+                .WithOne()
+                .HasForeignKey(x => x.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

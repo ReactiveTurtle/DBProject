@@ -1,4 +1,3 @@
-using System;
 using Domain.Shared;
 using Toolkit.Domain.Abstractions;
 
@@ -9,11 +8,16 @@ namespace Domain.InvoiceModel
     /// </summary>
     public class ProductPreset : Entity, IAggregateRoot
     {
+        /// <summary>
+        /// Данные о производителе товара
+        /// </summary>
+        public int ManufacturerId { get; private set; }
+        
         public Product Product { get; private set; }
 
-        public ProductPreset(Product product)
+        public ProductPreset(int manufacturerId, Product product)
         {
-            Update(product);
+            Update(manufacturerId, product);
         }
 
         // Workaround for EF
@@ -21,8 +25,9 @@ namespace Domain.InvoiceModel
         {
         }
         
-        public void Update(Product product)
+        public void Update(int manufacturerId, Product product)
         {
+            ManufacturerId = manufacturerId;
             Product = product;
         }
     }

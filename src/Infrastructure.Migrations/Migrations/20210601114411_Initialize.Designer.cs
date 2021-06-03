@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20210530173833_Initialize")]
+    [Migration("20210601114411_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,12 +38,13 @@ namespace Infrastructure.Migrations.Migrations
 
                     b.Property<DateTime>("PreparationDate");
 
-                    b.Property<string>("Signer")
-                        .IsRequired();
+                    b.Property<int>("SignerId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Invoices");
+                    b.HasIndex("SignerId");
+
+                    b.ToTable("Invoice");
                 });
 
             modelBuilder.Entity("Domain.InvoiceModel.ManufacturerPreset", b =>
@@ -55,7 +56,26 @@ namespace Infrastructure.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers");
+                    b.ToTable("Manufacturer");
+                });
+
+            modelBuilder.Entity("Domain.InvoiceModel.ProductInInvoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("InvoiceId");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductInInvoice");
                 });
 
             modelBuilder.Entity("Domain.InvoiceModel.ProductPreset", b =>
@@ -65,9 +85,13 @@ namespace Infrastructure.Migrations.Migrations
                         .HasAnnotation("SqlServer:HiLoSequenceName", "DBSequenceHiLoForProduct")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
+                    b.Property<int>("ManufacturerId");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.HasIndex("ManufacturerId");
+
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("Domain.InvoiceModel.SignerPreset", b =>
@@ -79,7 +103,15 @@ namespace Infrastructure.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Signers");
+                    b.ToTable("Signer");
+                });
+
+            modelBuilder.Entity("Domain.InvoiceModel.Invoice", b =>
+                {
+                    b.HasOne("Domain.InvoiceModel.SignerPreset")
+                        .WithMany()
+                        .HasForeignKey("SignerId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.InvoiceModel.ManufacturerPreset", b =>
@@ -104,7 +136,7 @@ namespace Infrastructure.Migrations.Migrations
 
                             b1.HasKey("ManufacturerPresetId");
 
-                            b1.ToTable("Manufacturers");
+                            b1.ToTable("Manufacturer");
 
                             b1.HasOne("Domain.InvoiceModel.ManufacturerPreset")
                                 .WithOne("Manufacturer")
@@ -113,8 +145,26 @@ namespace Infrastructure.Migrations.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.InvoiceModel.ProductInInvoice", b =>
+                {
+                    b.HasOne("Domain.InvoiceModel.Invoice")
+                        .WithMany("Products")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.InvoiceModel.ProductPreset")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Domain.InvoiceModel.ProductPreset", b =>
                 {
+                    b.HasOne("Domain.InvoiceModel.ManufacturerPreset")
+                        .WithMany()
+                        .HasForeignKey("ManufacturerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.OwnsOne("Domain.Shared.Product", "Product", b1 =>
                         {
                             b1.Property<int>("ProductPresetId");
@@ -125,9 +175,6 @@ namespace Infrastructure.Migrations.Migrations
 
                             b1.Property<DateTime>("ManufactureDateTime");
 
-                            b1.Property<string>("Manufacturer")
-                                .IsRequired();
-
                             b1.Property<string>("Name")
                                 .IsRequired();
 
@@ -136,7 +183,7 @@ namespace Infrastructure.Migrations.Migrations
 
                             b1.HasKey("ProductPresetId");
 
-                            b1.ToTable("Products");
+                            b1.ToTable("Product");
 
                             b1.HasOne("Domain.InvoiceModel.ProductPreset")
                                 .WithOne("Product")
@@ -165,7 +212,7 @@ namespace Infrastructure.Migrations.Migrations
 
                             b1.HasKey("SignerPresetId");
 
-                            b1.ToTable("Signers");
+                            b1.ToTable("Signer");
 
                             b1.HasOne("Domain.InvoiceModel.SignerPreset")
                                 .WithOne("Signer")
