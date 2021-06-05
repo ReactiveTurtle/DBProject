@@ -1,0 +1,69 @@
+<div class="rt-card mt-5">
+    <h2 class="rt-card-title">Информация о накладной</h2>
+    <form [formGroup]="form">
+        <div class="input-wrapper">
+            <input type="text"
+                   id="name"
+                   formControlName="name"
+                   inputValidate>
+            <label for="name">Название</label>
+        </div>
+        <div class="input-wrapper mb-0">
+            <input type="date"
+                   id="preparationDate"
+                   formControlName="preparationDate"
+                   inputValidate>
+            <label for="preparationDate">Дата подготовки</label>
+        </div>
+        <div class="d-flex">
+            <div class="input-wrapper mr-3">
+                <input type="text"
+                       id="signer"
+                       formControlName="signer"
+                       inputValidate>
+                <label for="signer">Подписант</label>
+            </div>
+            <div class="m-auto">
+                <button class="rt-button blue" (click)="openSignerDialog()">Выбрать</button>
+            </div>
+        </div>
+        <div>
+            <div class="input-wrapper">
+                <input type="hidden"
+                       id="products"
+                       formControlName="products"
+                       inputValidate>
+                <label for="products">Товары</label>
+            </div>
+            <div class="m-auto pt-3">
+                <button class="rt-button blue" (click)="openProductDialog()">Выбрать</button>
+            </div>
+            <div class="ml-2 mt-3">
+            <a *ngFor="let productPreset of productPresets"
+               routerLink="/products/{{productPreset.id}}">
+                <div class="mt-2">Производитель:
+                    <a routerLink="/manufacturers/{{productPreset.manufacturerPreset.id}}">{{ productPreset.manufacturerPreset.manufacturer.name }}
+                        ({{productPreset.manufacturerPreset.manufacturer.address}})</a>
+                </div>
+                <div>Название: {{productPreset.product.name}}</div>
+                <div>
+                    Цена: {{productPreset.product.price}} {{productPreset.product.currencyType | currencyType}}</div>
+                <div>Дата производства: {{productPreset.product.manufactureDateTime | date: 'dd MMMM yyyy'}}</div>
+                <div>Срок годности: {{productPreset.product.expirationDateTime | date: 'dd MMMM yyyy'}}</div>
+                <div class="mb-2">Id: {{productPreset.id}}</div>
+            </a>
+            </div>
+        </div>
+    </form>
+
+    <button class="d-inline-flex rt-button mt-3 mb-2"
+            [disabled]="!isQueryHandled"
+            (click)="upsert()">
+        Добавить
+        <mat-spinner *ngIf="!isQueryHandled"
+                     [diameter]="20"
+                     color="accent"
+                     mode="indeterminate">
+        </mat-spinner>
+    </button>
+</div>

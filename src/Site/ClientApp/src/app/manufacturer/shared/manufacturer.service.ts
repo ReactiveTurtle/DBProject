@@ -34,9 +34,15 @@ export class ManufacturerService {
 
     public updateManufacturer(
         manufacturerId: number,
-        upsertCommand: IUpsertManufacturerCommand): Observable<null> {
-        return this.http.post<null>(
+        upsertCommand: IUpsertManufacturerCommand): Observable<ArrayBuffer[]> {
+        return this.http.post<ArrayBuffer[]>(
             `${this.manufacturerApiUrl}/${manufacturerId}/update`,
             upsertCommand);
+    }
+
+    public deleteManufacturer(manufacturerId: number): Observable<ArrayBuffer[]> {
+        return this.http.post<ArrayBuffer[]>(
+            `${this.manufacturerApiUrl}/${manufacturerId}/delete`,
+            {});
     }
 }

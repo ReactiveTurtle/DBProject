@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Toolkit.Domain.Abstractions;
+using Toolkit.Exceptions;
 
-namespace Toolkit.Exceptions
+namespace Toolkit.Extensions
 {
     public static class ExceptionExtensions
     {

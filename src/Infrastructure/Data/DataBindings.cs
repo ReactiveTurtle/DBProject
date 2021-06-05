@@ -11,6 +11,9 @@ namespace Infrastructure.Data
         public static IServiceCollection AddRepositories( this IServiceCollection services )
         {
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ISignerRepository, SignerRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
             return services;
         }

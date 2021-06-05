@@ -1,0 +1,26 @@
+<div *ngIf="productPreset"
+     class="rt-card mt-3 mb-4">
+    <h2 class="rt-card-title">Информация о товаре</h2>
+    <div class="rt-list mx-3">
+        <div>Производитель:
+            <a routerLink="/manufacturers/{{productPreset.manufacturerPreset.id}}">{{ productPreset.manufacturerPreset.manufacturer.name }}
+                ({{productPreset.manufacturerPreset.manufacturer.address}})</a>
+        </div>
+        <div>Название: {{productPreset.product.name}}</div>
+        <div>
+            Цена: {{productPreset.product.price}} {{productPreset.product.currencyType | currencyType}}</div>
+        <div>Дата производства: {{productPreset.product.manufactureDateTime | date: 'dd MMMM yyyy'}}</div>
+        <div>Срок годности: {{productPreset.product.expirationDateTime | date: 'dd MMMM yyyy'}}</div>
+        <div>Id: {{productPreset.id}}</div>
+    </div>
+
+    <button class="d-inline-flex rt-button blue mt-3 mb-2 ml-2 mr-2"
+            routerLink="update">
+        Редактировать
+    </button>
+
+    <button class="d-inline-flex rt-button red mt-3 mb-2"
+            (click)="delete()">
+        Удалить
+    </button>
+</div>

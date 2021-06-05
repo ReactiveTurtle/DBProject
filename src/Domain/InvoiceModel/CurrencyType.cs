@@ -5,10 +5,10 @@ namespace Domain.InvoiceModel
         /// <summary>
         /// Российский рубль
         /// </summary>
-        Ruble,
+        Ruble = 0,
         /// <summary>
         /// Американский доллар
         /// </summary>
-        Dollar
+        Dollar = 1
     }
 }

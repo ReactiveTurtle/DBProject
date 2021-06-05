@@ -1,6 +1,13 @@
 <div class="rt-card mt-5">
-    <manufacturer-form #manufacturerForm></manufacturer-form>
-    <button class="rt-button mt-3 mb-2"
-            (click)="upsert()">Добавить
+    <rt-manufacturer-form #manufacturerForm></rt-manufacturer-form>
+    <button class="d-inline-flex rt-button mt-3 mb-2"
+            [disabled]="!isQueryHandled"
+            (click)="upsert()">
+        Добавить
+        <mat-spinner *ngIf="!isQueryHandled"
+                     [diameter]="20"
+                     color="accent"
+                     mode="indeterminate">
+        </mat-spinner>
     </button>
 </div>

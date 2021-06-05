@@ -1,0 +1,57 @@
+<h2 class="rt-card-title">Информация о производителе</h2>
+<form [formGroup]="form">
+    <div class="d-flex">
+        <div class="input-wrapper mr-3">
+            <input type="text"
+                   id="manufacturer"
+                   formControlName="manufacturer"
+                   inputValidate>
+            <label for="manufacturer">Производитель</label>
+        </div>
+        <div class="m-auto">
+            <button class="rt-button blue" (click)="openDialog()">Выбрать</button>
+        </div>
+    </div>
+    <div class="input-wrapper mt-0">
+        <input type="text"
+               id="name"
+               formControlName="name"
+               inputValidate>
+        <label for="name">Название</label>
+    </div>
+    <div>
+        <div class="input-wrapper">
+            <input type="number"
+                   id="price"
+                   formControlName="price"
+                   inputValidate>
+            <label for="price">Цена</label>
+        </div>
+        <div class="input-wrapper">
+            <select id="currencyType"
+                    formControlName="currencyType"
+                    inputValidate>
+                <option *ngFor="let option of currencyTypeSelectOptions"
+                        [value]="option.value">{{option.label}}</option>
+            </select>
+            <label for="currencyType">Валюта</label>
+        </div>
+    </div>
+    <div [formGroup]="dateRangeGroup">
+        <div class="input-wrapper">
+            <input type="date"
+                   id="manufactureDateTime"
+                   formControlName="manufactureDateTime"
+                   inputValidate>
+            <label for="manufactureDateTime">Дата производства</label>
+        </div>
+        <div class="input-wrapper">
+            <input type="date"
+                   id="expirationDateTime"
+                   formControlName="expirationDateTime"
+                   inputValidate>
+            <label for="expirationDateTime">Срок годности</label>
+        </div>
+    </div>
+</form>
+    

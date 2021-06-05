@@ -1,0 +1,29 @@
+<table class="mat-elevation-z8 rt-table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Адрес</th>
+        <th>Телефон</th>
+        <th>ФИО Менеджера</th>
+    </tr>
+    </thead>
+    <ng-container *ngIf="manufacturers">
+        <tbody *ngIf="manufacturers.items.length > 0">
+        <tr class="table-row"
+            (click)="selected(manufacturerPreset)"
+            *ngFor="let manufacturerPreset of manufacturers.items">
+            <td>{{ manufacturerPreset.id }}</td>
+            <td>{{ manufacturerPreset.manufacturer.name }}</td>
+            <td>{{ manufacturerPreset.manufacturer.address }}</td>
+            <td>{{ manufacturerPreset.manufacturer.phoneNumber }}</td>
+            <td>{{ manufacturerPreset.manufacturer.managerFullname }}</td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="manufacturers.items.length == 0">
+        <tr>
+            <td colspan="5">{{ undefined?.value == '' ? 'Список пуст' : 'Ничего не найдено' }}</td>
+        </tr>
+        </tbody>
+    </ng-container>
+</table>

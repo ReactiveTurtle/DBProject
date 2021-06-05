@@ -9,20 +9,20 @@ namespace Infrastructure.Web
 {
     public static class HttpGlobalExceptionHandlerMiddleware
     {
-        public static IApplicationBuilder UseHttpGlobalExceptionHandler( this IApplicationBuilder app )
+        public static IApplicationBuilder UseHttpGlobalExceptionHandler(this IApplicationBuilder app)
         {
-            return app.UseExceptionHandler( appError =>
+            return app.UseExceptionHandler(appError =>
             {
-                appError.Run( async context =>
+                appError.Run(async context =>
                 {
                     context.Response.Clear();
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     context.Response.ContentType = "application/problem+json";
 
-                    var errorResponse = new ErrorResponse( "Unhandled exception" );
+                    var errorResponse = new ErrorResponse("Unhandled exception");
 
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                    switch ( contextFeature?.Error )
+                    switch (contextFeature?.Error)
                     {
                         case ValidationException _:
                             context.Response.StatusCode = StatusCodes.Status400BadRequest;
@@ -48,11 +48,14 @@ namespace Infrastructure.Web
                                 Details = contextFeature.Error.Message
                             };
                             break;
+                        default:
+                            errorResponse.Details = contextFeature?.Error.Message;
+                            break;
                     }
 
-                    await context.Response.WriteAsync( JsonConvert.SerializeObject( errorResponse ) );
-                } );
-            } );
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(errorResponse));
+                });
+            });
         }
     }
 }

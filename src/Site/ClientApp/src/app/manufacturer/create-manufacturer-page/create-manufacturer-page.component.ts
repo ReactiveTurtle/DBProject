@@ -4,13 +4,14 @@ import {ManufacturerFormComponent} from '../shared/manufacturer-form/manufacture
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'create-manufacturer-page',
+    selector: 'rt-create-manufacturer-page',
     templateUrl: './create-manufacturer-page.component.html',
     styleUrls: ['./create-manufacturer-page.component.scss'],
     providers: [ManufacturerService]
 })
 export class CreateManufacturerPageComponent implements OnInit {
     @ViewChild('manufacturerForm') private manufacturerForm: ManufacturerFormComponent;
+    public isQueryHandled = true;
 
     public constructor(
         private router: Router,
@@ -25,8 +26,10 @@ export class CreateManufacturerPageComponent implements OnInit {
             this.manufacturerForm.form.markAllAsTouched();
             return;
         }
+        this.isQueryHandled = false;
         this.manufacturerService.createManufacturer(this.manufacturerForm.buildUpsertCommand())
             .subscribe((id: number) => {
+                this.isQueryHandled = true;
                 this.router.navigate(['/manufacturers', id]).then();
             });
     }

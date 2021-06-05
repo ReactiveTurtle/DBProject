@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Domain.Shared;
 using Toolkit.Domain.Abstractions;
 
 namespace Domain.InvoiceModel
@@ -29,9 +28,9 @@ namespace Domain.InvoiceModel
         {
         }
 
-        public void AddProduct(int manufacturerId, int productId)
+        public void AddProduct(int productId, int invoiceId)
         {
-            _products.Add(new ProductInInvoice(manufacturerId, productId));
+            _products.Add(new ProductInInvoice(productId, invoiceId));
         }
     }
 }

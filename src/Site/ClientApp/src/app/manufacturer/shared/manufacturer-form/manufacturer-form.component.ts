@@ -4,7 +4,7 @@ import {IUpsertManufacturerCommand} from '../upsert-manufacturer-command.interfa
 import {IManufacturerPreset} from '../manufacturer-preset.interface';
 
 @Component({
-    selector: 'manufacturer-form',
+    selector: 'rt-manufacturer-form',
     templateUrl: './manufacturer-form.component.html'
 })
 export class ManufacturerFormComponent implements OnInit {
@@ -14,7 +14,7 @@ export class ManufacturerFormComponent implements OnInit {
     public form: FormGroup;
 
     public ngOnInit(): void {
-        this.form = this.buildFormGroup();
+        this.form = this.buildFormGroup()
         if (this.nameControl.value) {
             this.nameControl.markAsDirty();
         }

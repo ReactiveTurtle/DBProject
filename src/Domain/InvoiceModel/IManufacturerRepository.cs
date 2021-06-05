@@ -11,6 +11,8 @@ namespace Domain.InvoiceModel
 
         Task<ManufacturerPreset> GetById(int id);
 
+        Task<IReadOnlyDictionary<int, ManufacturerPreset>> GetDictionaryByIds(IReadOnlyList<int> manufacturerIds);
+        
         Task<int> Add(ManufacturerPreset manufacturerPreset);
 
         Task Update(ManufacturerPreset manufacturerPreset);

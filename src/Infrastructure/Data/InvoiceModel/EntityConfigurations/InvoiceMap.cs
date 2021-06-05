@@ -11,16 +11,20 @@ namespace Infrastructure.Data.InvoiceModel.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
                 .ForSqlServerUseSequenceHiLo(HiLoSequence.DBSequenceHiLoForInvoice);
-            
-            builder.Property( x => x.Name )
-                .HasMaxLength( Invoice.NameMaxLength )
+
+            builder.Property(x => x.Name)
+                .HasMaxLength(Invoice.NameMaxLength)
                 .IsRequired();
-            
-            builder.Property( x => x.SignerId )
+
+            builder.Property(x => x.SignerId)
                 .IsRequired();
-            
-            builder.Property( x => x.PreparationDate )
+
+            builder.Property(x => x.PreparationDate)
                 .IsRequired();
+
+            builder.Metadata
+                .FindNavigation(nameof(Invoice.Products))
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

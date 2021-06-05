@@ -7,7 +7,7 @@ namespace Api.MessageContracts
     {
         public static ManufacturerPresetDto Map(this ManufacturerPreset manufacturerPreset)
         {
-            return new ManufacturerPresetDto
+            return new()
             {
                 Id = manufacturerPreset.Id,
                 Manufacturer = manufacturerPreset.Manufacturer.Map()

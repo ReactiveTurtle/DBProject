@@ -11,6 +11,10 @@ import {ManufacturerFormComponent} from './shared/manufacturer-form/manufacturer
 import {SharedModule} from '../shared/shared.module';
 import {UpdateManufacturerPageComponent} from './update-manufacturer-page/update-manufacturer-page.component';
 import {ManufacturerPageComponent} from './manufacturer-page/manufacturer-page.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {ManufacturerListComponent} from './shared/manufacturer-list/manufacturer-list.component';
+import {SelectManufacturerDialogComponent} from './shared/select-manufacturer-dialog/select-manufacturer-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -18,7 +22,9 @@ import {ManufacturerPageComponent} from './manufacturer-page/manufacturer-page.c
         ManufacturerListPageComponent,
         CreateManufacturerPageComponent,
         UpdateManufacturerPageComponent,
-        ManufacturerPageComponent
+        ManufacturerPageComponent,
+        ManufacturerListComponent,
+        SelectManufacturerDialogComponent
     ],
     imports: [
         HttpClientModule,
@@ -27,7 +33,12 @@ import {ManufacturerPageComponent} from './manufacturer-page/manufacturer-page.c
         MatButtonModule,
         MatTableModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        MatProgressSpinnerModule,
+        MatDialogModule
+    ],
+    exports: [
+        SelectManufacturerDialogComponent
     ],
     providers: []
 })

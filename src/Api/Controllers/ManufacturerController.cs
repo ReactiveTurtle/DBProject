@@ -7,7 +7,7 @@ using Infrastructure.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Toolkit.Domain.Abstractions;
-using Toolkit.Exceptions;
+using Toolkit.Extensions;
 using Toolkit.Search;
 
 namespace Api.Controllers
@@ -44,7 +44,7 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetManufacturer(int manufacturerId)
         {
-            var manufacturerPreset = await _manufacturerRepository.GetById(manufacturerId)
+            ManufacturerPreset manufacturerPreset = await _manufacturerRepository.GetById(manufacturerId)
                 .ThrowIfEntityNotFound(manufacturerId);
 
             return Ok(manufacturerPreset.Map());
@@ -56,7 +56,7 @@ namespace Api.Controllers
         public async Task<IActionResult> CreateManufacturer(
             [FromBody] UpsertManufacturerDto upsertManufacturerDto)
         {
-            var manufacturerPreset = new ManufacturerPreset(
+            ManufacturerPreset manufacturerPreset = new ManufacturerPreset(
                 new Manufacturer(
                     upsertManufacturerDto.Name,
                     upsertManufacturerDto.Address,
@@ -64,10 +64,10 @@ namespace Api.Controllers
                     upsertManufacturerDto.Email,
                     upsertManufacturerDto.ManagerFullname));
 
-            int contractId = await _manufacturerRepository.Add(manufacturerPreset);
+            int manufacturerId = await _manufacturerRepository.Add(manufacturerPreset);
 
             await _unitOfWork.SaveEntitiesAsync();
-            return Ok(contractId);
+            return Ok(manufacturerId);
         }
 
         [HttpPost("{manufacturerId:int}/update")]
@@ -77,7 +77,7 @@ namespace Api.Controllers
             [FromRoute] int manufacturerId,
             [FromBody] UpsertManufacturerDto upsertManufacturerDto)
         {
-            var manufacturerPreset = await _manufacturerRepository
+            ManufacturerPreset manufacturerPreset = await _manufacturerRepository
                 .GetById(manufacturerId)
                 .ThrowIfEntityNotFound(manufacturerId);
             
@@ -90,6 +90,21 @@ namespace Api.Controllers
                     upsertManufacturerDto.ManagerFullname));
 
             await _manufacturerRepository.Update(manufacturerPreset);
+
+            await _unitOfWork.SaveEntitiesAsync();
+            return Ok();
+        }
+        
+        [HttpPost("{manufacturerId:int}/delete")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteManufacturer([FromRoute] int manufacturerId)
+        {
+            ManufacturerPreset manufacturerPreset = await _manufacturerRepository
+                .GetById(manufacturerId)
+                .ThrowIfEntityNotFound(manufacturerId);
+            
+            await _manufacturerRepository.Delete(manufacturerPreset);
 
             await _unitOfWork.SaveEntitiesAsync();
             return Ok();

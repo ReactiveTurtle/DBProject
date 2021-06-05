@@ -1,0 +1,21 @@
+<div *ngIf="signerPreset"
+     class="rt-card mt-3 mb-4">
+    <h2 class="rt-card-title">Информация о подписанте</h2>
+    <div class="rt-list mx-3">
+        <div>ФИО: {{signerPreset.signer.fullname}}</div>
+        <div>Должность: {{signerPreset.signer.position}}</div>
+        <div>Адрес: {{signerPreset.signer.address}}</div>
+        <div>Телефон: {{signerPreset.signer.phoneNumber}}</div>
+        <div>Id: {{signerPreset.id}}</div>
+    </div>
+    
+    <button class="d-inline-flex rt-button blue mt-3 mb-2 ml-2 mr-2"
+            routerLink="update">
+        Редактировать
+    </button>
+
+    <button class="d-inline-flex rt-button red mt-3 mb-2"
+            (click)="delete()">
+        Удалить
+    </button>
+</div>

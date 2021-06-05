@@ -1,0 +1,29 @@
+<table class="mat-elevation-z8 rt-table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>ФИО</th>
+        <th>Должность</th>
+        <th>Адрес</th>
+        <th>Телефон</th>
+    </tr>
+    </thead>
+    <ng-container *ngIf="signers">
+        <tbody *ngIf="signers.items.length > 0">
+        <tr class="table-row"
+            (click)="selected(signerPreset)"
+            *ngFor="let signerPreset of signers.items">
+            <td>{{ signerPreset.id }}</td>
+            <td>{{ signerPreset.signer.fullname }}</td>
+            <td>{{ signerPreset.signer.position }}</td>
+            <td>{{ signerPreset.signer.address }}</td>
+            <td>{{ signerPreset.signer.phoneNumber }}</td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="signers.items.length == 0">
+        <tr>
+            <td colspan="5">{{ undefined?.value == '' ? 'Список пуст' : 'Ничего не найдено' }}</td>
+        </tr>
+        </tbody>
+    </ng-container>
+</table>

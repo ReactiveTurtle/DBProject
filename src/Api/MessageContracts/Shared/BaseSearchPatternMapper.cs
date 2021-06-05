@@ -6,7 +6,7 @@ namespace Api.MessageContracts.Shared
     {
         public static BaseSearchPattern Map( this BaseSearchPatternDto searchPatternDto )
         {
-            return new BaseSearchPattern( searchPatternDto.PageNumber, searchPatternDto.OnPageCount )
+            return new( searchPatternDto.PageNumber, searchPatternDto.OnPageCount )
             {
                 SearchString = searchPatternDto.SearchString
             };

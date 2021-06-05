@@ -1,7 +1,7 @@
 <div class="rt-card mt-5"
      *ngIf="manufacturerPreset">
-    <manufacturer-form #manufacturerForm
-                       [manufacturerPreset]="manufacturerPreset"></manufacturer-form>
+    <rt-manufacturer-form #manufacturerForm
+                       [manufacturerPreset]="manufacturerPreset"></rt-manufacturer-form>
     <button class="rt-button mt-3 mb-2"
             (click)="upsert()">Сохранить
     </button>

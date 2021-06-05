@@ -1,0 +1,8 @@
+<div class="rt-card mt-5"
+     *ngIf="signerPreset">
+    <rt-signer-form #signerForm
+                    [signerPreset]="signerPreset"></rt-signer-form>
+    <button class="rt-button mt-3 mb-2"
+            (click)="upsert()">Сохранить
+    </button>
+</div>

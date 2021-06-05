@@ -1,22 +1,17 @@
 import {Component} from '@angular/core';
-import {ManufacturerService} from '../shared/manufacturer.service';
 import {IManufacturerPreset} from '../shared/manufacturer-preset.interface';
-import {ISearchResult} from '../../shared/search-result.interface';
-import {BaseSearchPattern} from '../../shared/base-search-pattern';
+import {Router} from '@angular/router';
 
 @Component({
-    selector: 'manufacturer-list-page',
+    selector: 'rt-manufacturer-list-page',
     templateUrl: './manufacturer-list-page.component.html',
-    styleUrls: ['./manufacturer-list-page.component.scss'],
-    providers: [ManufacturerService]
+    styleUrls: ['./manufacturer-list-page.component.scss']
 })
 export class ManufacturerListPageComponent {
-    public manufacturers: ISearchResult<IManufacturerPreset>;
+    public constructor(private router: Router) {
+    }
 
-    public constructor(private manufacturerService: ManufacturerService) {
-        manufacturerService.searchManufacturers(new BaseSearchPattern(1, 10, ''))
-            .subscribe(result => {
-                this.manufacturers = result;
-            });
+    public goToManufacturerPage(manufacturerPreset: IManufacturerPreset): void {
+        this.router.navigate(['/manufacturers', manufacturerPreset.id]).then();
     }
 }

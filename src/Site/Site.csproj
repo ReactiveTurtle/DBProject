@@ -29,9 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ClientApp\src\app\home\home-page" />
       <Folder Include="ClientApp\src\app\home\shared" />
-      <Folder Include="ClientApp\src\app\product\shared" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

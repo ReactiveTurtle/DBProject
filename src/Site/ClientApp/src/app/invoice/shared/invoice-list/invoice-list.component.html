@@ -1,0 +1,28 @@
+<table class="mat-elevation-z8 rt-table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Дата подготовки</th>
+        <th>Подписант</th>
+    </tr>
+    </thead>
+    <ng-container *ngIf="invoices">
+        <tbody *ngIf="invoices.items.length > 0">
+        <tr class="table-row"
+            (click)="selected(invoice)"
+            *ngFor="let invoice of invoices.items">
+            <td>{{ invoice.id }}</td>
+            <td>{{ invoice.name }}</td>
+            <td>{{ invoice.preparationDate | date: 'dd MMMM yyyy' }}</td>
+            <td>{{ invoice.signerPreset.signer.fullname }} 
+                ({{ invoice.signerPreset.signer.position }}, {{ invoice.signerPreset.signer.phoneNumber }})</td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="invoices.items.length == 0">
+        <tr>
+            <td colspan="5">{{ undefined?.value == '' ? 'Список пуст' : 'Ничего не найдено' }}</td>
+        </tr>
+        </tbody>
+    </ng-container>
+</table>

@@ -1,0 +1,10 @@
+<div class="container mt-3 mb-4">
+    <div class="my-3">
+        <button routerLink="create"
+                class="rt-button">
+            Добавить накладную
+        </button>
+    </div>
+
+    <rt-invoice-list (select)="goToInvoicePage($event)"></rt-invoice-list>
+</div>

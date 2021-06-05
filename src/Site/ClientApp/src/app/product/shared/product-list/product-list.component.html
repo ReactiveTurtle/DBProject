@@ -1,0 +1,33 @@
+<table class="mat-elevation-z8 rt-table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Производитель</th>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Дата производства</th>
+        <th>Срок годности</th>
+    </tr>
+    </thead>
+    <ng-container *ngIf="products">
+        <tbody *ngIf="products.items.length > 0">
+        <tr class="table-row"
+            (click)="selected(productPreset)"
+            *ngFor="let productPreset of products.items">
+            <td>{{ productPreset.id }}</td>
+            <td>{{ productPreset.manufacturerPreset.manufacturer.name }}
+                ({{productPreset.manufacturerPreset.manufacturer.address}})
+            </td>
+            <td>{{ productPreset.product.name }}</td>
+            <td>{{ productPreset.product.price }} {{ productPreset.product.currencyType | currencyType }}</td>
+            <td>{{ productPreset.product.manufactureDateTime | date: 'dd MMMM yyyy'}}</td>
+            <td>{{ productPreset.product.expirationDateTime | date: 'dd MMMM yyyy'}}</td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="products.items.length == 0">
+        <tr>
+            <td colspan="6">{{ undefined?.value == '' ? 'Список пуст' : 'Ничего не найдено' }}</td>
+        </tr>
+        </tbody>
+    </ng-container>
+</table>

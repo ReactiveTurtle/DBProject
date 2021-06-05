@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Api.MessageContracts.Shared
+namespace Api.MessageContracts
 {
     [DataContract]
     public class UpsertManufacturerDto

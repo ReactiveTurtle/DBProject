@@ -1,0 +1,32 @@
+<h2 class="rt-card-title">Информация о подписанте</h2>
+<form [formGroup]="form">
+    <div class="input-wrapper">
+        <input type="text"
+               id="fullname"
+               formControlName="fullname"
+               inputValidate>
+        <label for="fullname">ФИО</label>
+    </div>
+    <div class="input-wrapper">
+        <input type="text"
+               id="position"
+               formControlName="position"
+               inputValidate>
+        <label for="position">Должность</label>
+    </div>
+    <div class="input-wrapper">
+        <input type="text"
+               id="address"
+               formControlName="address"
+               inputValidate>
+        <label for="address">Адрес</label>
+    </div>
+    <div class="input-wrapper">
+        <input type="text"
+               id="phoneNumber"
+               formControlName="phoneNumber"
+               inputValidate>
+        <label for="phoneNumber">Телефон</label>
+    </div>
+</form>
+    

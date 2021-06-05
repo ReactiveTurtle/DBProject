@@ -6,7 +6,7 @@ namespace Api.MessageContracts.Shared
     {
         public static ManufacturerDto Map(this Manufacturer manufacturer)
         {
-            return new ManufacturerDto
+            return new()
             {
                 Name = manufacturer.Name,
                 Address = manufacturer.Address,

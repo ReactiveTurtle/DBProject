@@ -1,0 +1,8 @@
+<div class="rt-card mt-5"
+     *ngIf="productPreset">
+    <rt-product-form #productForm
+                     [productPreset]="productPreset"></rt-product-form>
+    <button class="rt-button mt-3 mb-2"
+            (click)="upsert()">Сохранить
+    </button>
+</div>

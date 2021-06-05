@@ -1,0 +1,13 @@
+<div class="rt-card mt-5">
+    <rt-signer-form #signerForm></rt-signer-form>
+    <button class="d-inline-flex rt-button mt-3 mb-2"
+            [disabled]="!isQueryHandled"
+            (click)="upsert()">
+        Добавить
+        <mat-spinner *ngIf="!isQueryHandled"
+                     [diameter]="20"
+                     color="accent"
+                     mode="indeterminate">
+        </mat-spinner>
+    </button>
+</div>

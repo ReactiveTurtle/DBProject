@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {IManufacturerPreset} from '../shared/manufacturer-preset.interface';
 
 @Component({
-    selector: 'update-manufacturer-page',
+    selector: 'rt-update-manufacturer-page',
     templateUrl: './update-manufacturer-page.component.html',
     styleUrls: ['./update-manufacturer-page.component.scss'],
     providers: [ManufacturerService]

@@ -1,0 +1,10 @@
+<div class="container mt-3 mb-4">
+    <div class="my-3">
+        <button routerLink="create"
+                class="rt-button">
+            Добавить подписанта
+        </button>
+    </div>
+
+    <rt-signer-list (select)="goToSignerPage($event)"></rt-signer-list>
+</div>

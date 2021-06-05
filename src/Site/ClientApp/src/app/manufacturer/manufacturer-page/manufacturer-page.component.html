@@ -1,15 +1,22 @@
 <div *ngIf="manufacturerPreset"
      class="rt-card mt-3 mb-4">
     <h2 class="rt-card-title">Информация о производителе</h2>
-    <div class="mx-3">
-        <div>Имя:           {{manufacturerPreset.manufacturer.name}}</div>
-        <div>Адрес:         {{manufacturerPreset.manufacturer.address}}</div>
-        <div>Телефон:       {{manufacturerPreset.manufacturer.phoneNumber}}</div>
-        <div>Email:         {{manufacturerPreset.manufacturer.email}}</div>
+    <div class="rt-list mx-3">
+        <div>Имя: {{manufacturerPreset.manufacturer.name}}</div>
+        <div>Адрес: {{manufacturerPreset.manufacturer.address}}</div>
+        <div>Телефон: {{manufacturerPreset.manufacturer.phoneNumber}}</div>
+        <div>Email: {{manufacturerPreset.manufacturer.email}}</div>
         <div>ФИО Менеджера: {{manufacturerPreset.manufacturer.managerFullname}}</div>
+        <div>Id: {{manufacturerPreset.id}}</div>
     </div>
-    <button class="rt-button mt-3 mb-2"
+    
+    <button class="d-inline-flex rt-button blue mt-3 mb-2 ml-2 mr-2"
             routerLink="update">
         Редактировать
+    </button>
+
+    <button class="d-inline-flex rt-button red mt-3 mb-2"
+            (click)="delete()">
+        Удалить
     </button>
 </div>

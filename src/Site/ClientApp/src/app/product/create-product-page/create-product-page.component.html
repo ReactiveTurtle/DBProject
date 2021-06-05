@@ -1,0 +1,8 @@
+<div class="rt-card mt-5">
+    <rt-product-form #productForm></rt-product-form>
+    <button class="rt-button mt-3 mb-2"
+            [disabled]="!isQueryHandled"
+            (click)="upsert()">
+        Добавить
+    </button>
+</div>

@@ -6,33 +6,5 @@
         </button>
     </div>
 
-    <table *ngIf="manufacturers"
-           class="mat-elevation-z8 rt-table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Название</th>
-            <th>Адрес</th>
-            <th>Телефон</th>
-            <th>ФИО Менеджера</th>
-        </tr>
-        </thead>
-        <tbody *ngIf="manufacturers.items.length > 0">
-        <tr class="table-row"
-            routerLinkActive="active"
-            routerLink="{{ manufacturerPreset.id }}"
-            *ngFor="let manufacturerPreset of manufacturers.items">
-            <td>{{ manufacturerPreset.id }}</td>
-            <td>{{ manufacturerPreset.manufacturer.name }}</td>
-            <td>{{ manufacturerPreset.manufacturer.address }}</td>
-            <td>{{ manufacturerPreset.manufacturer.phoneNumber }}</td>
-            <td>{{ manufacturerPreset.manufacturer.managerFullname }}</td>
-        </tr>
-        </tbody>
-        <tbody *ngIf="manufacturers.items.length == 0">
-        <tr>
-            <th colspan="5">{{ undefined?.value == '' ? 'Список пуст' : 'Ничего не найдено' }}</th>
-        </tr>
-        </tbody>
-    </table>
+    <rt-manufacturer-list (select)="goToManufacturerPage($event)"></rt-manufacturer-list>
 </div>
